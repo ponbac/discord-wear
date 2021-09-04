@@ -1,5 +1,6 @@
 package app.backman.discordwearos.data
 
+import app.backman.discordwearos.data.entity.MembersResponse
 import retrofit2.http.GET
 
 interface DiscordService {
@@ -8,5 +9,5 @@ interface DiscordService {
     }
 
     @GET("/members")
-    suspend fun getCountries(): CountriesResponse
+    suspend fun getMembers(): MembersResponse
 }
