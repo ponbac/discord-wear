@@ -2,8 +2,8 @@ package app.backman.discordwearos
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.INVISIBLE
+import android.util.Log
+import android.view.View.*
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.backman.discordwearos.data.DiscordRepository
@@ -34,23 +34,26 @@ class MainActivity : Activity() {
         val call = request.getMembers()
         call.enqueue(object : Callback<List<Member>> {
             override fun onResponse(call: Call<List<Member>>, response: Response<List<Member>>) {
-                if (response.isSuccessful){
-                    // Hide loading text
+                if (response.isSuccessful) {
+                    // Hide loading text and display text if no one is online
                     binding.progressBar.visibility = GONE
-                    // Populate RecyclerView
-                    binding.memberRecyclerView.apply {
-                        setHasFixedSize(true)
-                        layoutManager = linearLayoutManager
-                        adapter = RecyclerAdapter(response.body()!!)
+                    if (response.body()?.isEmpty() == true) {
+                        Log.v("Donka", "NO ONE ONLINE!")
+                        binding.emptyMembers.visibility = VISIBLE
+                    } else {
+                        // Populate RecyclerView
+                        binding.memberRecyclerView.apply {
+                            setHasFixedSize(true)
+                            layoutManager = linearLayoutManager
+                            adapter = RecyclerAdapter(response.body()!!)
+                        }
                     }
                 }
             }
+
             override fun onFailure(call: Call<List<Member>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-
-        /*val onlineMembers = DiscordRepository().fetchAllMembers()
-        binding.text.text = onlineMembers.toString()*/
     }
 }

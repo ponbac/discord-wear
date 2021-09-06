@@ -20,7 +20,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="@android:color/holo_orange_dark"/>
+            android:indeterminateTint="@android:color/holo_orange_dark"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/emptyMembers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/emptyMembers"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            tools:visibility="invisible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memberRecyclerView"
