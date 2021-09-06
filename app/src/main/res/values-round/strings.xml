@@ -1,3 +1,5 @@
 <resources>
     <string name="hello_world">Hello Round World!</string>
+    <string name="loading">Loading…</string>
+    <string name="user_s_avatar">User\'s avatar</string>
 </resources>

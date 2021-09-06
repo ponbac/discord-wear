@@ -4,5 +4,6 @@ import java.net.URL
 
 data class Member (
     val nick: String?,
-    val avatarUrl: URL?
+    val avatar: String?,
+    val isStreaming: Boolean?
 )

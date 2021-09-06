@@ -1,3 +1,4 @@
+package app.backman.discordwearos.tiles/*
 package app.backman.discordwearos.tiles
 
 import androidx.core.content.ContextCompat
@@ -59,10 +60,12 @@ private const val ARC_TOTAL_DEGREES = 360f
 private const val ID_IMAGE_START_RUN = "image_start_run"
 private const val ID_CLICK_START_RUN = "click_start_run"
 
+*/
 /**
  * Creates a Fitness Tile, showing your progress towards a daily goal. The progress is defined
  * randomly, for demo purposes only. A new random progress is shown when the user taps the button.
- */
+ *//*
+
 class DiscordTileService : TileProviderService() {
     // For coroutines, use a custom scope we can cancel when the service is destroyed
     private val serviceScope = CoroutineScope(Dispatchers.IO)
@@ -213,4 +216,4 @@ class DiscordTileService : TileProviderService() {
                 // TODO: Add click (END)
             )
             .build()
-}
+}*/
