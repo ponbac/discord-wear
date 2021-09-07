@@ -16,6 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 private const val TAG = "MainActivity.kt"
+
 class MainActivity : Activity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -47,10 +48,11 @@ class MainActivity : Activity() {
                         binding.emptyMembers.visibility = VISIBLE
                     } else {
                         // Populate RecyclerView
+                        val memberList = response.body()!!.sortedBy { it.channelId }
                         binding.memberRecyclerView.apply {
                             setHasFixedSize(true)
                             layoutManager = linearLayoutManager
-                            adapter = RecyclerAdapter(response.body()!!)
+                            adapter = RecyclerAdapter(memberList)
                         }
                     }
                 }

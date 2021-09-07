@@ -42,17 +42,22 @@ class RecyclerAdapter(private val members: List<Member>) : RecyclerView.Adapter<
 
         fun bindMember(member: Member) {
             this.member = member
+            val colorMatrix =  ColorMatrix()
+            val filter =  ColorMatrixColorFilter(colorMatrix)
             Glide.with(view.context).load(member.avatar).transform(RoundedCorners(40)).into(avatarView)
-            nickView.text = member.nick //if (member.channelId != "692002738208243723") member.nick else ("\uD83D\uDE34 " + member.nick)
+            nickView.text = member.nick
+            // Set correct colors in case it previously was modified
+            nickView.setTextColor(Color.WHITE)
+            colorMatrix.setSaturation(1.0f)
+            avatarView.colorFilter = filter
+            // If member is in AFK channel
             if (member.channelId == "692002738208243723") {
                 // Grey avatar and text
                 nickView.setTextColor(Color.GRAY)
-                val colorMatrix =  ColorMatrix();
-                colorMatrix.setSaturation(0.0f);
-                val filter =  ColorMatrixColorFilter(colorMatrix);
-                avatarView.colorFilter = filter;
+                colorMatrix.setSaturation(0.0f)
+                avatarView.colorFilter = filter
             } else if (member.isStreaming == true) {
-                nickView.setTextColor(Color.RED)
+                nickView.setTextColor(Color.parseColor("#ffff8800"))
             }
         }
 
