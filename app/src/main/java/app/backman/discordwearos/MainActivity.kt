@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+private const val TAG = "MainActivity.kt"
 class MainActivity : Activity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -28,6 +29,10 @@ class MainActivity : Activity() {
         // Set up RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
         binding.memberRecyclerView.layoutManager = linearLayoutManager
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         // Call API and act on response
         val request = ServiceBuilder.buildService(DiscordService::class.java)
@@ -38,7 +43,7 @@ class MainActivity : Activity() {
                     // Hide loading text and display text if no one is online
                     binding.progressBar.visibility = GONE
                     if (response.body()?.isEmpty() == true) {
-                        Log.v("Donka", "NO ONE ONLINE!")
+                        Log.v(TAG, "NO ONE ONLINE!")
                         binding.emptyMembers.visibility = VISIBLE
                     } else {
                         // Populate RecyclerView
