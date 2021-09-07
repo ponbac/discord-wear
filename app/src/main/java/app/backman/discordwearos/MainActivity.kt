@@ -49,6 +49,7 @@ class MainActivity : Activity() {
                     } else {
                         // Populate RecyclerView
                         val memberList = response.body()!!.sortedBy { it.channelId }
+                            .sortedByDescending { it.isStreaming } // AFK's at bottom and streamers at top
                         binding.memberRecyclerView.apply {
                             setHasFixedSize(true)
                             layoutManager = linearLayoutManager
