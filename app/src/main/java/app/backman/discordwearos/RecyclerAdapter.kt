@@ -1,6 +1,8 @@
 package app.backman.discordwearos
 
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -41,8 +43,15 @@ class RecyclerAdapter(private val members: List<Member>) : RecyclerView.Adapter<
         fun bindMember(member: Member) {
             this.member = member
             Glide.with(view.context).load(member.avatar).transform(RoundedCorners(40)).into(avatarView)
-            nickView.text = member.nick
-            if (member.isStreaming == true) {
+            nickView.text = member.nick //if (member.channelId != "692002738208243723") member.nick else ("\uD83D\uDE34 " + member.nick)
+            if (member.channelId == "692002738208243723") {
+                // Grey avatar and text
+                nickView.setTextColor(Color.GRAY)
+                val colorMatrix =  ColorMatrix();
+                colorMatrix.setSaturation(0.0f);
+                val filter =  ColorMatrixColorFilter(colorMatrix);
+                avatarView.colorFilter = filter;
+            } else if (member.isStreaming == true) {
                 nickView.setTextColor(Color.RED)
             }
         }
