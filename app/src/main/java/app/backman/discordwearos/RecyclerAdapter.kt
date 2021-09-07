@@ -3,6 +3,7 @@ package app.backman.discordwearos
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.graphics.Typeface
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,7 @@ class RecyclerAdapter(private val members: List<Member>) : RecyclerView.Adapter<
             val filter =  ColorMatrixColorFilter(colorMatrix)
             Glide.with(view.context).load(member.avatar).transform(RoundedCorners(40)).into(avatarView)
             nickView.text = member.nick
-            // Set correct colors in case it previously was modified
+            // Set correct colors and style in case it previously was modified
             nickView.setTextColor(Color.WHITE)
             colorMatrix.setSaturation(1.0f)
             avatarView.colorFilter = filter
@@ -57,7 +58,8 @@ class RecyclerAdapter(private val members: List<Member>) : RecyclerView.Adapter<
                 colorMatrix.setSaturation(0.0f)
                 avatarView.colorFilter = filter
             } else if (member.isStreaming == true) {
-                nickView.setTextColor(Color.parseColor("#ffff8800"))
+                nickView.setTextColor(Color.parseColor("#ff4242"))
+                nickView.setTypeface(null, Typeface.BOLD_ITALIC)
             }
         }
 

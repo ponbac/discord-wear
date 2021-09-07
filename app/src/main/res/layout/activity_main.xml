@@ -34,7 +34,7 @@
             android:visibility="invisible"
             tools:visibility="invisible" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.wear.widget.WearableRecyclerView
             android:id="@+id/memberRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

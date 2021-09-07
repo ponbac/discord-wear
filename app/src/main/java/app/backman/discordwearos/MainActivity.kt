@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View.*
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import app.backman.discordwearos.data.DiscordRepository
 import app.backman.discordwearos.data.DiscordService
 import app.backman.discordwearos.data.entity.Member
 import app.backman.discordwearos.databinding.ActivityMainBinding
@@ -46,8 +45,12 @@ class MainActivity : Activity() {
                     if (response.body()?.isEmpty() == true) {
                         Log.v(TAG, "NO ONE ONLINE!")
                         binding.emptyMembers.visibility = VISIBLE
+                        binding.memberRecyclerView.visibility = GONE
                     } else {
                         // Populate RecyclerView
+                        binding.emptyMembers.visibility = GONE
+                        binding.memberRecyclerView.visibility = VISIBLE
+                        binding.memberRecyclerView.requestFocus()
                         val memberList = response.body()!!.sortedBy { it.channelId }
                             .sortedByDescending { it.isStreaming } // AFK's at bottom and streamers at top
                         binding.memberRecyclerView.apply {
